@@ -6,6 +6,7 @@ go_library(
         "buckets.go",
         "error_logger.go",
         "jsonnet.go",
+        "starlark.go",
         "status.go",
         "tls.go",
         "uuid.go",
@@ -13,9 +14,11 @@ go_library(
     importpath = "github.com/buildbarn/bb-storage/pkg/util",
     visibility = ["//visibility:public"],
     deps = [
+        "//pkg/proto/configuration",
         "//pkg/proto/configuration/tls",
         "@com_github_google_go_jsonnet//:go-jsonnet",
         "@com_github_google_uuid//:uuid",
+        "@net_starlark_go//starlark:go_default_library",
         "@org_golang_google_grpc//codes",
         "@org_golang_google_grpc//status",
         "@org_golang_google_protobuf//encoding/protojson",
@@ -27,13 +30,16 @@ go_test(
     name = "util_test",
     srcs = [
         "buckets_test.go",
+        "starlark_test.go",
         "tls_test.go",
     ],
+    embed = [":util"],
     deps = [
-        ":util",
+        "//pkg/proto/configuration/bb_storage",
         "//pkg/proto/configuration/tls",
         "@com_github_stretchr_testify//require",
         "@org_golang_google_grpc//codes",
         "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//proto",
     ],
 )
