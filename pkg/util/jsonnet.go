@@ -27,7 +27,10 @@ func UnmarshalConfigurationFromFile(path string, configuration proto.Message) er
 	if err != nil {
 		return StatusWrapf(err, "Failed to read file contents")
 	}
+	return eval(jsonnetInput, path, configuration)
+}
 
+func eval(jsonnetInput []byte, path string, configuration proto.Message) error {
 	// Create a Jsonnet VM where all of the environment variables of
 	// the current process are available through std.extVar().
 	vm := jsonnet.MakeVM()

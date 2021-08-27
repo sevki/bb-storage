@@ -7,11 +7,12 @@
 package builder
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	grpc "github.com/buildbarn/bb-storage/pkg/proto/configuration/grpc"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -116,11 +117,14 @@ func file_pkg_proto_configuration_builder_builder_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_configuration_builder_builder_proto_rawDescData
 }
 
-var file_pkg_proto_configuration_builder_builder_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_pkg_proto_configuration_builder_builder_proto_goTypes = []interface{}{
-	(*SchedulerConfiguration)(nil),   // 0: buildbarn.configuration.builder.SchedulerConfiguration
-	(*grpc.ClientConfiguration)(nil), // 1: buildbarn.configuration.grpc.ClientConfiguration
-}
+var (
+	file_pkg_proto_configuration_builder_builder_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_pkg_proto_configuration_builder_builder_proto_goTypes  = []interface{}{
+		(*SchedulerConfiguration)(nil),   // 0: buildbarn.configuration.builder.SchedulerConfiguration
+		(*grpc.ClientConfiguration)(nil), // 1: buildbarn.configuration.grpc.ClientConfiguration
+	}
+)
+
 var file_pkg_proto_configuration_builder_builder_proto_depIdxs = []int32{
 	1, // 0: buildbarn.configuration.builder.SchedulerConfiguration.endpoint:type_name -> buildbarn.configuration.grpc.ClientConfiguration
 	1, // [1:1] is the sub-list for method output_type

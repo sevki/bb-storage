@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "configuration",
+    srcs = ["registry.go"],
+    importpath = "github.com/buildbarn/bb-storage/pkg/proto/configuration",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@net_starlark_go//starlark:go_default_library",
+        "@net_starlark_go//starlarkstruct:go_default_library",
+    ],
+)

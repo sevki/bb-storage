@@ -10,6 +10,10 @@ proto_library(
 
 go_proto_library(
     name = "local_go_proto",
+    compilers = [
+        "@io_bazel_rules_go//proto:go_proto",
+        "//tools:starlark_go",
+    ],
     importpath = "github.com/buildbarn/bb-storage/pkg/proto/blobstore/local",
     proto = ":local_proto",
     visibility = ["//visibility:public"],

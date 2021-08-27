@@ -11,6 +11,10 @@ proto_library(
 
 go_proto_library(
     name = "cas_go_proto",
+    compilers = [
+        "@io_bazel_rules_go//proto:go_proto",
+        "//tools:starlark_go",
+    ],
     importpath = "github.com/buildbarn/bb-storage/pkg/proto/cas",
     proto = ":cas_proto",
     visibility = ["//visibility:public"],
