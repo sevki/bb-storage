@@ -10,10 +10,9 @@ import (
 	"os"
 )
 
-const SPIFFE_ENDPT = "SPIFFE_ENDPOINT_SOCKET"
 
 func HasSpireEndpoint() bool {
-	s := os.Getenv(SPIFFE_ENDPT)
+	s := os.Getenv(workloadapi.SocketEnv)
 	if s == "" {
 		return false
 	}
@@ -27,31 +26,21 @@ func HasSpireEndpoint() bool {
 	return false
 }
 
-func GetTlsClientConfig() (*tls.Config, error) {
-	s := os.Getenv(SPIFFE_ENDPT)
-	if s == "" {
-		return nil, fmt.Errorf(SPIFFE_ENDPT + " not found in environment")
-	}
-	src, err := workloadapi.NewX509Source(context.Background(), workloadapi.WithClientOptions(workloadapi.WithAddr("unix://"+s)))
+func GetTLSClientConfig() (*tls.Config, error) {
+	src, err := workloadapi.NewX509Source(context.Background())
 	if err != nil {
 		return nil, err
 	}
-	defer src.Close()
 
 	tlsConfig := tlsconfig.MTLSClientConfig(src, src, tlsconfig.AuthorizeAny())
 	return tlsConfig, nil
 }
 
-func GetTlsServerConfig() (*tls.Config, error) {
-	s := os.Getenv(SPIFFE_ENDPT)
-	if s == "" {
-		return nil, fmt.Errorf(SPIFFE_ENDPT + " not found in environment")
-	}
-	src, err := workloadapi.NewX509Source(context.Background(), workloadapi.WithClientOptions(workloadapi.WithAddr("unix://"+s)))
+func GetTLSServerConfig() (*tls.Config, error) {
+	src, err := workloadapi.NewX509Source(context.Background())
 	if err != nil {
 		return nil, err
 	}
-	defer src.Close()
 
 	tlsConfig := tlsconfig.MTLSServerConfig(src, src, tlsconfig.AuthorizeAny())
 	return tlsConfig, nil

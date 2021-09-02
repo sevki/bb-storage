@@ -49,7 +49,7 @@ func (cf baseClientFactory) NewClientFromConfiguration(config *configuration.Cli
 	if spire.HasSpireEndpoint() {  // temporary approach
 		// I'd rather not have this stuck in a "FromConfiguration" function, as this has nothing to do with the configuration.
 		// But this is the most expedient place for it, so here we are.
-		tlsConfig, err = spire.GetTlsClientConfig()
+		tlsConfig, err = spire.GetTLSClientConfig()
 	} else if tlsConfig, err = util.NewTLSConfigFromClientConfiguration(config.Tls); err != nil {
 		return nil, util.StatusWrap(err, "Failed to create TLS configuration")
 	}

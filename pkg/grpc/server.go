@@ -60,7 +60,7 @@ func NewServersFromConfigurationAndServe(configurations []*configuration.ServerC
 		// Enable TLS if provided.
 		var tlsConfig *tls.Config
 		if spire.HasSpireEndpoint() {  // temporary approach
-			tlsConfig, err = spire.GetTlsServerConfig()
+			tlsConfig, err = spire.GetTLSServerConfig()
 		} else if tlsConfig, err = util.NewTLSConfigFromServerConfiguration(configuration.Tls); err != nil {
 			return err
 		}
