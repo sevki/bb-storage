@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+
 	// The pprof package does not provide a function for registering
 	// its endpoints against an arbitrary mux. Load it to force
 	// registration against the default mux, so we can forward
@@ -21,7 +22,7 @@ import (
 	pb "github.com/buildbarn/bb-storage/pkg/proto/configuration/global"
 	"github.com/buildbarn/bb-storage/pkg/util"
 	"github.com/gorilla/mux"
-	"github.com/grpc-ecosystem/go-grpc-prometheus"
+	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/client_golang/prometheus/push"

@@ -8,6 +8,7 @@ require (
 	dmitri.shuralyov.com/go/generated v0.0.0-20170818220700-b1254a446363 // indirect
 	github.com/aws/aws-sdk-go v1.40.14
 	github.com/bazelbuild/remote-apis v0.0.0-20210718193713-0ecef08215cf
+	github.com/envoyproxy/protoc-gen-validate v0.6.2-0.20210915190518-848cd32d1009 // indirect
 	github.com/go-redis/redis/extra/redisotel v0.3.0
 	github.com/go-redis/redis/v8 v8.11.1
 	github.com/golang/mock v1.6.0
@@ -21,6 +22,7 @@ require (
 	github.com/klauspost/compress v1.13.3
 	github.com/lazybeaver/xorshift v0.0.0-20170702203709-ce511d4823dd
 	github.com/prometheus/client_golang v1.11.0
+	github.com/spiffe/go-spiffe/v2 v2.0.0-beta.8 // indirect
 	github.com/stretchr/testify v1.7.0
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.22.0
 	go.opentelemetry.io/otel v1.0.0-RC2
@@ -30,7 +32,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.0.0-RC2
 	go.opentelemetry.io/proto/otlp v0.9.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c
+	golang.org/x/sys v0.0.0-20210816183151-1e6c022a8912
 	google.golang.org/genproto v0.0.0-20210803142424-70bd63adacf2
 	google.golang.org/grpc v1.39.0
 	google.golang.org/protobuf v1.27.1
