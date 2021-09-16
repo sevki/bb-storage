@@ -8,14 +8,15 @@ package icas
 
 import (
 	context "context"
+	reflect "reflect"
+	sync "sync"
+
 	v2 "github.com/bazelbuild/remote-apis/build/bazel/remote/execution/v2"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -446,19 +447,22 @@ func file_pkg_proto_icas_icas_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_icas_icas_proto_rawDescData
 }
 
-var file_pkg_proto_icas_icas_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_pkg_proto_icas_icas_proto_goTypes = []interface{}{
-	(*Reference)(nil),                            // 0: buildbarn.icas.Reference
-	(*BatchUpdateReferencesRequest)(nil),         // 1: buildbarn.icas.BatchUpdateReferencesRequest
-	(*GetReferenceRequest)(nil),                  // 2: buildbarn.icas.GetReferenceRequest
-	(*Reference_S3)(nil),                         // 3: buildbarn.icas.Reference.S3
-	(*BatchUpdateReferencesRequest_Request)(nil), // 4: buildbarn.icas.BatchUpdateReferencesRequest.Request
-	(v2.Compressor_Value)(0),                     // 5: build.bazel.remote.execution.v2.Compressor.Value
-	(*v2.Digest)(nil),                            // 6: build.bazel.remote.execution.v2.Digest
-	(*v2.FindMissingBlobsRequest)(nil),           // 7: build.bazel.remote.execution.v2.FindMissingBlobsRequest
-	(*v2.FindMissingBlobsResponse)(nil),          // 8: build.bazel.remote.execution.v2.FindMissingBlobsResponse
-	(*v2.BatchUpdateBlobsResponse)(nil),          // 9: build.bazel.remote.execution.v2.BatchUpdateBlobsResponse
-}
+var (
+	file_pkg_proto_icas_icas_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+	file_pkg_proto_icas_icas_proto_goTypes  = []interface{}{
+		(*Reference)(nil),                            // 0: buildbarn.icas.Reference
+		(*BatchUpdateReferencesRequest)(nil),         // 1: buildbarn.icas.BatchUpdateReferencesRequest
+		(*GetReferenceRequest)(nil),                  // 2: buildbarn.icas.GetReferenceRequest
+		(*Reference_S3)(nil),                         // 3: buildbarn.icas.Reference.S3
+		(*BatchUpdateReferencesRequest_Request)(nil), // 4: buildbarn.icas.BatchUpdateReferencesRequest.Request
+		(v2.Compressor_Value)(0),                     // 5: build.bazel.remote.execution.v2.Compressor.Value
+		(*v2.Digest)(nil),                            // 6: build.bazel.remote.execution.v2.Digest
+		(*v2.FindMissingBlobsRequest)(nil),           // 7: build.bazel.remote.execution.v2.FindMissingBlobsRequest
+		(*v2.FindMissingBlobsResponse)(nil),          // 8: build.bazel.remote.execution.v2.FindMissingBlobsResponse
+		(*v2.BatchUpdateBlobsResponse)(nil),          // 9: build.bazel.remote.execution.v2.BatchUpdateBlobsResponse
+	}
+)
+
 var file_pkg_proto_icas_icas_proto_depIdxs = []int32{
 	3, // 0: buildbarn.icas.Reference.s3:type_name -> buildbarn.icas.Reference.S3
 	5, // 1: buildbarn.icas.Reference.decompressor:type_name -> build.bazel.remote.execution.v2.Compressor.Value
@@ -571,8 +575,10 @@ func file_pkg_proto_icas_icas_proto_init() {
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConnInterface
+var (
+	_ context.Context
+	_ grpc.ClientConnInterface
+)
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
@@ -630,15 +636,16 @@ type IndirectContentAddressableStorageServer interface {
 }
 
 // UnimplementedIndirectContentAddressableStorageServer can be embedded to have forward compatible implementations.
-type UnimplementedIndirectContentAddressableStorageServer struct {
-}
+type UnimplementedIndirectContentAddressableStorageServer struct{}
 
 func (*UnimplementedIndirectContentAddressableStorageServer) FindMissingReferences(context.Context, *v2.FindMissingBlobsRequest) (*v2.FindMissingBlobsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindMissingReferences not implemented")
 }
+
 func (*UnimplementedIndirectContentAddressableStorageServer) BatchUpdateReferences(context.Context, *BatchUpdateReferencesRequest) (*v2.BatchUpdateBlobsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchUpdateReferences not implemented")
 }
+
 func (*UnimplementedIndirectContentAddressableStorageServer) GetReference(context.Context, *GetReferenceRequest) (*Reference, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReference not implemented")
 }

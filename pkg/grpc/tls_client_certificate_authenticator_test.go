@@ -5,11 +5,13 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
+	"log"
 	"testing"
 	"time"
 
 	"github.com/buildbarn/bb-storage/internal/mock"
 	bb_grpc "github.com/buildbarn/bb-storage/pkg/grpc"
+	"github.com/buildbarn/bb-storage/pkg/proto/configuration/spiffe"
 	"github.com/buildbarn/bb-storage/pkg/testutil"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
@@ -79,6 +81,20 @@ X11W5GGCYmt9pipFomH/UyefjeGn+bBsySa+wZdYW5hAXUe8kKm1b4JglqO/GvQE
 Dj2jEQIEIpxsRYpW3lOv0n7Dkmq+iCCINDmp1ojESpemJXVZXJApEJeQ893FddCh
 YBd2RaOw/dmr7t5l94BfD9ImQp9ab7n7cnisqev2nKPXvALBtgU3sec9jqBRVL5o
 -----END CERTIFICATE-----`)
+	certificateSpiffe = parseCertificate(`
+-----BEGIN CERTIFICATE-----
+MIICBjCCAYygAwIBAgIQNj0chc2GkwvkNG0vVbWuADAKBggqhkjOPQQDAzAeMQsw
+CQYDVQQGEwJVUzEPMA0GA1UEChMGU1BJRkZFMB4XDTIwMDMyNDE0MTM0MVoXDTIw
+MDMyNDE1MTM1MVowHTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBVNQSVJFMFkwEwYH
+KoZIzj0CAQYIKoZIzj0DAQcDQgAE8ST0O2obQ9VYEyFEbiyIML7naZtAtA9DU9df
+zYCeA4fHplrgk0ZL+MBXOMjCEo0fLX+jxqMpLuPy7wGfwlqRaKOBrDCBqTAOBgNV
+HQ8BAf8EBAMCA6gwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1Ud
+EwEB/wQCMAAwHQYDVR0OBBYEFB3UYIIkxjMf9rh9tvwj86Y24+6gMB8GA1UdIwQY
+MBaAFNM1QzCBy3PuB2d3zJi6GSEqqVF5MCoGA1UdEQQjMCGGH3NwaWZmZTovL2V4
+YW1wbGUub3JnL3dvcmtsb2FkLTEwCgYIKoZIzj0EAwMDaAAwZQIwKhlIltKg+K/3
+W05Snv56s7X9NuUDKHjaCQsutyIiYxbxQz5jZgjafMusAwr+lMQkAjEAsY4Omqtj
+MT7lix7GtnRkvgmaWRTyooxyR1C2w8PYS6lSo6FJCIV6e1EBvryj6Vm1
+-----END CERTIFICATE-----`)
 )
 
 func parseCertificate(v string) *x509.Certificate {
@@ -93,7 +109,7 @@ func TestTLSClientCertificateAuthenticator(t *testing.T) {
 	clientCAs := x509.NewCertPool()
 	clientCAs.AddCert(certificateValid)
 	clock := mock.NewMockClock(ctrl)
-	authenticator := bb_grpc.NewTLSClientCertificateAuthenticator(clientCAs, clock)
+	authenticator := bb_grpc.NewTLSClientCertificateAuthenticator(clientCAs, clock, nil)
 
 	t.Run("NoGRPC", func(t *testing.T) {
 		// Authenticator is used outside of gRPC, meaning it cannot
@@ -184,6 +200,117 @@ func TestTLSClientCertificateAuthenticator(t *testing.T) {
 						State: tls.ConnectionState{
 							PeerCertificates: []*x509.Certificate{
 								certificateValid,
+							},
+						},
+					},
+				}))
+		require.NoError(t, err)
+	})
+}
+
+func TestTLSSpiffeClientCertificateAuthenticator(t *testing.T) {
+	ctrl, ctx := gomock.WithContext(context.Background(), t)
+
+	clientCAs := x509.NewCertPool()
+	clientCAs.AddCert(certificateSpiffe)
+	clock := mock.NewMockClock(ctrl)
+	authenticator := bb_grpc.NewTLSClientCertificateAuthenticator(clientCAs, clock, &spiffe.SubjectMatcher{
+		AllowedSpiffeIds: map[string]string{
+			"example.org": "workload-1",
+		},
+	})
+
+	t.Run("NoGRPC", func(t *testing.T) {
+		// Authenticator is used outside of gRPC, meaning it cannot
+		// extract peer state information.
+		_, err := authenticator.Authenticate(ctx)
+		require.Equal(
+			t,
+			status.Error(codes.Unauthenticated, "Connection was not established using gRPC"),
+			err)
+	})
+
+	t.Run("NoTLS", func(t *testing.T) {
+		// Non-TLS connection.
+		_, err := authenticator.Authenticate(peer.NewContext(ctx, &peer.Peer{}))
+		require.Equal(
+			t,
+			status.Error(codes.Unauthenticated, "Connection was not established using TLS"),
+			err)
+	})
+
+	t.Run("NoCertificateProvided", func(t *testing.T) {
+		// Connection with no certificate provided by the client.
+		_, err := authenticator.Authenticate(
+			peer.NewContext(
+				ctx,
+				&peer.Peer{
+					AuthInfo: credentials.TLSInfo{
+						State: tls.ConnectionState{},
+					},
+				}))
+		require.Equal(
+			t,
+			status.Error(codes.Unauthenticated, "Client provided no TLS client certificate"),
+			err)
+	})
+
+	t.Run("NoCAMatch", func(t *testing.T) {
+		// Connection with a certificate that doesn't match the CA.
+		clock.EXPECT().Now().Return(time.Unix(1600000000, 0))
+		_, err := authenticator.Authenticate(
+			peer.NewContext(
+				ctx,
+				&peer.Peer{
+					AuthInfo: credentials.TLSInfo{
+						State: tls.ConnectionState{
+							PeerCertificates: []*x509.Certificate{
+								certificateUnrelated,
+							},
+						},
+					},
+				}))
+		testutil.RequireEqualStatus(
+			t,
+			status.Error(codes.Unauthenticated, "Cannot validate TLS client certificate: x509: certificate signed by unknown authority"),
+			err)
+	})
+
+	t.Run("Expired", func(t *testing.T) {
+		// Connection with a certificate that is signed by the
+		// right CA, but expired.
+		clock.EXPECT().Now().Return(time.Unix(1700000000, 0))
+		_, err := authenticator.Authenticate(
+			peer.NewContext(
+				ctx,
+				&peer.Peer{
+					AuthInfo: credentials.TLSInfo{
+						State: tls.ConnectionState{
+							PeerCertificates: []*x509.Certificate{
+								certificateSpiffe,
+							},
+						},
+					},
+				}))
+		require.Equal(
+			t,
+			status.Error(codes.Unauthenticated, "Cannot validate TLS client certificate: x509: certificate has expired or is not yet valid: current time 2023-11-14T22:13:20Z is after 2020-03-24T15:13:51Z"),
+			err)
+	})
+
+	t.Run("Success", func(t *testing.T) {
+		// Connection with at least one verified chain.
+		time := certificateSpiffe.NotAfter.Add(-1 * time.Minute)
+		log.Println(certificateSpiffe)
+		clock.EXPECT().Now().Return(time)
+		_, err := authenticator.Authenticate(
+			peer.NewContext(
+				ctx,
+				&peer.Peer{
+					AuthInfo: credentials.TLSInfo{
+						State: tls.ConnectionState{
+							PeerCertificates: []*x509.Certificate{
+								certificateSpiffe,
 							},
 						},
 					},
