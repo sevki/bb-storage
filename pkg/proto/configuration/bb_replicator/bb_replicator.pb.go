@@ -7,14 +7,13 @@
 package bb_replicator
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	blobstore "github.com/buildbarn/bb-storage/pkg/proto/configuration/blobstore"
 	global "github.com/buildbarn/bb-storage/pkg/proto/configuration/global"
 	grpc "github.com/buildbarn/bb-storage/pkg/proto/configuration/grpc"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -180,17 +179,14 @@ func file_pkg_proto_configuration_bb_replicator_bb_replicator_proto_rawDescGZIP(
 	return file_pkg_proto_configuration_bb_replicator_bb_replicator_proto_rawDescData
 }
 
-var (
-	file_pkg_proto_configuration_bb_replicator_bb_replicator_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-	file_pkg_proto_configuration_bb_replicator_bb_replicator_proto_goTypes  = []interface{}{
-		(*ApplicationConfiguration)(nil),              // 0: buildbarn.configuration.bb_replicator.ApplicationConfiguration
-		(*grpc.ServerConfiguration)(nil),              // 1: buildbarn.configuration.grpc.ServerConfiguration
-		(*blobstore.BlobAccessConfiguration)(nil),     // 2: buildbarn.configuration.blobstore.BlobAccessConfiguration
-		(*blobstore.BlobReplicatorConfiguration)(nil), // 3: buildbarn.configuration.blobstore.BlobReplicatorConfiguration
-		(*global.Configuration)(nil),                  // 4: buildbarn.configuration.global.Configuration
-	}
-)
-
+var file_pkg_proto_configuration_bb_replicator_bb_replicator_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_pkg_proto_configuration_bb_replicator_bb_replicator_proto_goTypes = []interface{}{
+	(*ApplicationConfiguration)(nil),              // 0: buildbarn.configuration.bb_replicator.ApplicationConfiguration
+	(*grpc.ServerConfiguration)(nil),              // 1: buildbarn.configuration.grpc.ServerConfiguration
+	(*blobstore.BlobAccessConfiguration)(nil),     // 2: buildbarn.configuration.blobstore.BlobAccessConfiguration
+	(*blobstore.BlobReplicatorConfiguration)(nil), // 3: buildbarn.configuration.blobstore.BlobReplicatorConfiguration
+	(*global.Configuration)(nil),                  // 4: buildbarn.configuration.global.Configuration
+}
 var file_pkg_proto_configuration_bb_replicator_bb_replicator_proto_depIdxs = []int32{
 	1, // 0: buildbarn.configuration.bb_replicator.ApplicationConfiguration.grpc_servers:type_name -> buildbarn.configuration.grpc.ServerConfiguration
 	2, // 1: buildbarn.configuration.bb_replicator.ApplicationConfiguration.source:type_name -> buildbarn.configuration.blobstore.BlobAccessConfiguration

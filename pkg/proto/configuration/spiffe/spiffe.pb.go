@@ -7,11 +7,10 @@
 package spiffe
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -185,16 +184,13 @@ func file_pkg_proto_configuration_spiffe_spiffe_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_configuration_spiffe_spiffe_proto_rawDescData
 }
 
-var (
-	file_pkg_proto_configuration_spiffe_spiffe_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-	file_pkg_proto_configuration_spiffe_spiffe_proto_goTypes  = []interface{}{
-		(*Configuration)(nil),  // 0: buildbarn.configuration.spiffe.Configuration
-		(*SubjectMatcher)(nil), // 1: buildbarn.configuration.spiffe.SubjectMatcher
-		nil,                    // 2: buildbarn.configuration.spiffe.Configuration.CaCertificatesEntry
-		nil,                    // 3: buildbarn.configuration.spiffe.SubjectMatcher.AllowedSpiffeIdsEntry
-	}
-)
-
+var file_pkg_proto_configuration_spiffe_spiffe_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_pkg_proto_configuration_spiffe_spiffe_proto_goTypes = []interface{}{
+	(*Configuration)(nil),  // 0: buildbarn.configuration.spiffe.Configuration
+	(*SubjectMatcher)(nil), // 1: buildbarn.configuration.spiffe.SubjectMatcher
+	nil,                    // 2: buildbarn.configuration.spiffe.Configuration.CaCertificatesEntry
+	nil,                    // 3: buildbarn.configuration.spiffe.SubjectMatcher.AllowedSpiffeIdsEntry
+}
 var file_pkg_proto_configuration_spiffe_spiffe_proto_depIdxs = []int32{
 	2, // 0: buildbarn.configuration.spiffe.Configuration.ca_certificates:type_name -> buildbarn.configuration.spiffe.Configuration.CaCertificatesEntry
 	3, // 1: buildbarn.configuration.spiffe.SubjectMatcher.allowed_spiffe_ids:type_name -> buildbarn.configuration.spiffe.SubjectMatcher.AllowedSpiffeIdsEntry

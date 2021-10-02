@@ -7,9 +7,6 @@
 package bb_storage
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	auth "github.com/buildbarn/bb-storage/pkg/proto/configuration/auth"
 	blobstore "github.com/buildbarn/bb-storage/pkg/proto/configuration/blobstore"
 	builder "github.com/buildbarn/bb-storage/pkg/proto/configuration/builder"
@@ -17,6 +14,8 @@ import (
 	grpc "github.com/buildbarn/bb-storage/pkg/proto/configuration/grpc"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -448,22 +447,19 @@ func file_pkg_proto_configuration_bb_storage_bb_storage_proto_rawDescGZIP() []by
 	return file_pkg_proto_configuration_bb_storage_bb_storage_proto_rawDescData
 }
 
-var (
-	file_pkg_proto_configuration_bb_storage_bb_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-	file_pkg_proto_configuration_bb_storage_bb_storage_proto_goTypes  = []interface{}{
-		(*ApplicationConfiguration)(nil),             // 0: buildbarn.configuration.bb_storage.ApplicationConfiguration
-		(*NonScannableAuthorizersConfiguration)(nil), // 1: buildbarn.configuration.bb_storage.NonScannableAuthorizersConfiguration
-		(*ScannableAuthorizersConfiguration)(nil),    // 2: buildbarn.configuration.bb_storage.ScannableAuthorizersConfiguration
-		nil,                                       // 3: buildbarn.configuration.bb_storage.ApplicationConfiguration.SchedulersEntry
-		(*blobstore.BlobstoreConfiguration)(nil),  // 4: buildbarn.configuration.blobstore.BlobstoreConfiguration
-		(*grpc.ServerConfiguration)(nil),          // 5: buildbarn.configuration.grpc.ServerConfiguration
-		(*global.Configuration)(nil),              // 6: buildbarn.configuration.global.Configuration
-		(*blobstore.BlobAccessConfiguration)(nil), // 7: buildbarn.configuration.blobstore.BlobAccessConfiguration
-		(*auth.AuthorizerConfiguration)(nil),      // 8: buildbarn.configuration.auth.AuthorizerConfiguration
-		(*builder.SchedulerConfiguration)(nil),    // 9: buildbarn.configuration.builder.SchedulerConfiguration
-	}
-)
-
+var file_pkg_proto_configuration_bb_storage_bb_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_pkg_proto_configuration_bb_storage_bb_storage_proto_goTypes = []interface{}{
+	(*ApplicationConfiguration)(nil),             // 0: buildbarn.configuration.bb_storage.ApplicationConfiguration
+	(*NonScannableAuthorizersConfiguration)(nil), // 1: buildbarn.configuration.bb_storage.NonScannableAuthorizersConfiguration
+	(*ScannableAuthorizersConfiguration)(nil),    // 2: buildbarn.configuration.bb_storage.ScannableAuthorizersConfiguration
+	nil,                                       // 3: buildbarn.configuration.bb_storage.ApplicationConfiguration.SchedulersEntry
+	(*blobstore.BlobstoreConfiguration)(nil),  // 4: buildbarn.configuration.blobstore.BlobstoreConfiguration
+	(*grpc.ServerConfiguration)(nil),          // 5: buildbarn.configuration.grpc.ServerConfiguration
+	(*global.Configuration)(nil),              // 6: buildbarn.configuration.global.Configuration
+	(*blobstore.BlobAccessConfiguration)(nil), // 7: buildbarn.configuration.blobstore.BlobAccessConfiguration
+	(*auth.AuthorizerConfiguration)(nil),      // 8: buildbarn.configuration.auth.AuthorizerConfiguration
+	(*builder.SchedulerConfiguration)(nil),    // 9: buildbarn.configuration.builder.SchedulerConfiguration
+}
 var file_pkg_proto_configuration_bb_storage_bb_storage_proto_depIdxs = []int32{
 	4,  // 0: buildbarn.configuration.bb_storage.ApplicationConfiguration.blobstore:type_name -> buildbarn.configuration.blobstore.BlobstoreConfiguration
 	5,  // 1: buildbarn.configuration.bb_storage.ApplicationConfiguration.grpc_servers:type_name -> buildbarn.configuration.grpc.ServerConfiguration

@@ -7,11 +7,10 @@
 package blockdevice
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -197,14 +196,11 @@ func file_pkg_proto_configuration_blockdevice_blockdevice_proto_rawDescGZIP() []
 	return file_pkg_proto_configuration_blockdevice_blockdevice_proto_rawDescData
 }
 
-var (
-	file_pkg_proto_configuration_blockdevice_blockdevice_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-	file_pkg_proto_configuration_blockdevice_blockdevice_proto_goTypes  = []interface{}{
-		(*FileConfiguration)(nil), // 0: buildbarn.configuration.blockdevice.FileConfiguration
-		(*Configuration)(nil),     // 1: buildbarn.configuration.blockdevice.Configuration
-	}
-)
-
+var file_pkg_proto_configuration_blockdevice_blockdevice_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_pkg_proto_configuration_blockdevice_blockdevice_proto_goTypes = []interface{}{
+	(*FileConfiguration)(nil), // 0: buildbarn.configuration.blockdevice.FileConfiguration
+	(*Configuration)(nil),     // 1: buildbarn.configuration.blockdevice.Configuration
+}
 var file_pkg_proto_configuration_blockdevice_blockdevice_proto_depIdxs = []int32{
 	0, // 0: buildbarn.configuration.blockdevice.Configuration.file:type_name -> buildbarn.configuration.blockdevice.FileConfiguration
 	1, // [1:1] is the sub-list for method output_type

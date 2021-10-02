@@ -7,11 +7,10 @@
 package local
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -258,15 +257,12 @@ func file_pkg_proto_blobstore_local_local_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_blobstore_local_local_proto_rawDescData
 }
 
-var (
-	file_pkg_proto_blobstore_local_local_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-	file_pkg_proto_blobstore_local_local_proto_goTypes  = []interface{}{
-		(*BlockLocation)(nil),   // 0: buildbarn.blobstore.local.BlockLocation
-		(*BlockState)(nil),      // 1: buildbarn.blobstore.local.BlockState
-		(*PersistentState)(nil), // 2: buildbarn.blobstore.local.PersistentState
-	}
-)
-
+var file_pkg_proto_blobstore_local_local_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_pkg_proto_blobstore_local_local_proto_goTypes = []interface{}{
+	(*BlockLocation)(nil),   // 0: buildbarn.blobstore.local.BlockLocation
+	(*BlockState)(nil),      // 1: buildbarn.blobstore.local.BlockState
+	(*PersistentState)(nil), // 2: buildbarn.blobstore.local.PersistentState
+}
 var file_pkg_proto_blobstore_local_local_proto_depIdxs = []int32{
 	0, // 0: buildbarn.blobstore.local.BlockState.block_location:type_name -> buildbarn.blobstore.local.BlockLocation
 	1, // 1: buildbarn.blobstore.local.PersistentState.blocks:type_name -> buildbarn.blobstore.local.BlockState

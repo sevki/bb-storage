@@ -8,9 +8,6 @@ package iscc
 
 import (
 	context "context"
-	reflect "reflect"
-	sync "sync"
-
 	v2 "github.com/bazelbuild/remote-apis/build/bazel/remote/execution/v2"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -20,6 +17,8 @@ import (
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -469,22 +468,19 @@ func file_pkg_proto_iscc_iscc_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_iscc_iscc_proto_rawDescData
 }
 
-var (
-	file_pkg_proto_iscc_iscc_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-	file_pkg_proto_iscc_iscc_proto_goTypes  = []interface{}{
-		(*PreviousExecution)(nil),                   // 0: buildbarn.iscc.PreviousExecution
-		(*PerSizeClassStats)(nil),                   // 1: buildbarn.iscc.PerSizeClassStats
-		(*PreviousExecutionStats)(nil),              // 2: buildbarn.iscc.PreviousExecutionStats
-		(*GetPreviousExecutionStatsRequest)(nil),    // 3: buildbarn.iscc.GetPreviousExecutionStatsRequest
-		(*UpdatePreviousExecutionStatsRequest)(nil), // 4: buildbarn.iscc.UpdatePreviousExecutionStatsRequest
-		nil,                           // 5: buildbarn.iscc.PreviousExecutionStats.SizeClassesEntry
-		(*emptypb.Empty)(nil),         // 6: google.protobuf.Empty
-		(*durationpb.Duration)(nil),   // 7: google.protobuf.Duration
-		(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
-		(*v2.Digest)(nil),             // 9: build.bazel.remote.execution.v2.Digest
-	}
-)
-
+var file_pkg_proto_iscc_iscc_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_pkg_proto_iscc_iscc_proto_goTypes = []interface{}{
+	(*PreviousExecution)(nil),                   // 0: buildbarn.iscc.PreviousExecution
+	(*PerSizeClassStats)(nil),                   // 1: buildbarn.iscc.PerSizeClassStats
+	(*PreviousExecutionStats)(nil),              // 2: buildbarn.iscc.PreviousExecutionStats
+	(*GetPreviousExecutionStatsRequest)(nil),    // 3: buildbarn.iscc.GetPreviousExecutionStatsRequest
+	(*UpdatePreviousExecutionStatsRequest)(nil), // 4: buildbarn.iscc.UpdatePreviousExecutionStatsRequest
+	nil,                           // 5: buildbarn.iscc.PreviousExecutionStats.SizeClassesEntry
+	(*emptypb.Empty)(nil),         // 6: google.protobuf.Empty
+	(*durationpb.Duration)(nil),   // 7: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
+	(*v2.Digest)(nil),             // 9: build.bazel.remote.execution.v2.Digest
+}
 var file_pkg_proto_iscc_iscc_proto_depIdxs = []int32{
 	6,  // 0: buildbarn.iscc.PreviousExecution.failed:type_name -> google.protobuf.Empty
 	7,  // 1: buildbarn.iscc.PreviousExecution.timed_out:type_name -> google.protobuf.Duration
@@ -600,10 +596,8 @@ func file_pkg_proto_iscc_iscc_proto_init() {
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
-var (
-	_ context.Context
-	_ grpc.ClientConnInterface
-)
+var _ context.Context
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
@@ -650,12 +644,12 @@ type InitialSizeClassCacheServer interface {
 }
 
 // UnimplementedInitialSizeClassCacheServer can be embedded to have forward compatible implementations.
-type UnimplementedInitialSizeClassCacheServer struct{}
+type UnimplementedInitialSizeClassCacheServer struct {
+}
 
 func (*UnimplementedInitialSizeClassCacheServer) GetPreviousExecutionStats(context.Context, *GetPreviousExecutionStatsRequest) (*PreviousExecutionStats, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPreviousExecutionStats not implemented")
 }
-
 func (*UnimplementedInitialSizeClassCacheServer) UpdatePreviousExecutionStats(context.Context, *UpdatePreviousExecutionStatsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePreviousExecutionStats not implemented")
 }

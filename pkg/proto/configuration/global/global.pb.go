@@ -7,15 +7,14 @@
 package global
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	grpc "github.com/buildbarn/bb-storage/pkg/proto/configuration/grpc"
 	tls "github.com/buildbarn/bb-storage/pkg/proto/configuration/tls"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -1642,35 +1641,32 @@ func file_pkg_proto_configuration_global_global_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_configuration_global_global_proto_rawDescData
 }
 
-var (
-	file_pkg_proto_configuration_global_global_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
-	file_pkg_proto_configuration_global_global_proto_goTypes  = []interface{}{
-		(*BasicAuthenticationConfiguration)(nil),   // 0: buildbarn.configuration.global.BasicAuthenticationConfiguration
-		(*PrometheusPushgatewayConfiguration)(nil), // 1: buildbarn.configuration.global.PrometheusPushgatewayConfiguration
-		(*TracingConfiguration)(nil),               // 2: buildbarn.configuration.global.TracingConfiguration
-		(*SetUmaskConfiguration)(nil),              // 3: buildbarn.configuration.global.SetUmaskConfiguration
-		(*Configuration)(nil),                      // 4: buildbarn.configuration.global.Configuration
-		(*DiagnosticsHTTPServerConfiguration)(nil), // 5: buildbarn.configuration.global.DiagnosticsHTTPServerConfiguration
-		nil,                                  // 6: buildbarn.configuration.global.PrometheusPushgatewayConfiguration.GroupingEntry
-		(*TracingConfiguration_Backend)(nil), // 7: buildbarn.configuration.global.TracingConfiguration.Backend
-		(*TracingConfiguration_ResourceAttributeValue)(nil), // 8: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue
-		nil,                                  // 9: buildbarn.configuration.global.TracingConfiguration.ResourceAttributesEntry
-		(*TracingConfiguration_Sampler)(nil), // 10: buildbarn.configuration.global.TracingConfiguration.Sampler
-		(*TracingConfiguration_Backend_JaegerCollectorSpanExporter)(nil), // 11: buildbarn.configuration.global.TracingConfiguration.Backend.JaegerCollectorSpanExporter
-		(*TracingConfiguration_Backend_BatchSpanProcessor)(nil),          // 12: buildbarn.configuration.global.TracingConfiguration.Backend.BatchSpanProcessor
-		(*TracingConfiguration_ResourceAttributeValue_BoolArray)(nil),    // 13: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue.BoolArray
-		(*TracingConfiguration_ResourceAttributeValue_Int64Array)(nil),   // 14: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue.Int64Array
-		(*TracingConfiguration_ResourceAttributeValue_Float64Array)(nil), // 15: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue.Float64Array
-		(*TracingConfiguration_ResourceAttributeValue_StringArray)(nil),  // 16: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue.StringArray
-		(*TracingConfiguration_Sampler_ParentBased)(nil),                 // 17: buildbarn.configuration.global.TracingConfiguration.Sampler.ParentBased
-		(*TracingConfiguration_Sampler_MaximumRate)(nil),                 // 18: buildbarn.configuration.global.TracingConfiguration.Sampler.MaximumRate
-		(*durationpb.Duration)(nil),                                      // 19: google.protobuf.Duration
-		(*grpc.ClientConfiguration)(nil),                                 // 20: buildbarn.configuration.grpc.ClientConfiguration
-		(*emptypb.Empty)(nil),                                            // 21: google.protobuf.Empty
-		(*tls.ClientConfiguration)(nil),                                  // 22: buildbarn.configuration.tls.ClientConfiguration
-	}
-)
-
+var file_pkg_proto_configuration_global_global_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_pkg_proto_configuration_global_global_proto_goTypes = []interface{}{
+	(*BasicAuthenticationConfiguration)(nil),   // 0: buildbarn.configuration.global.BasicAuthenticationConfiguration
+	(*PrometheusPushgatewayConfiguration)(nil), // 1: buildbarn.configuration.global.PrometheusPushgatewayConfiguration
+	(*TracingConfiguration)(nil),               // 2: buildbarn.configuration.global.TracingConfiguration
+	(*SetUmaskConfiguration)(nil),              // 3: buildbarn.configuration.global.SetUmaskConfiguration
+	(*Configuration)(nil),                      // 4: buildbarn.configuration.global.Configuration
+	(*DiagnosticsHTTPServerConfiguration)(nil), // 5: buildbarn.configuration.global.DiagnosticsHTTPServerConfiguration
+	nil,                                  // 6: buildbarn.configuration.global.PrometheusPushgatewayConfiguration.GroupingEntry
+	(*TracingConfiguration_Backend)(nil), // 7: buildbarn.configuration.global.TracingConfiguration.Backend
+	(*TracingConfiguration_ResourceAttributeValue)(nil), // 8: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue
+	nil,                                  // 9: buildbarn.configuration.global.TracingConfiguration.ResourceAttributesEntry
+	(*TracingConfiguration_Sampler)(nil), // 10: buildbarn.configuration.global.TracingConfiguration.Sampler
+	(*TracingConfiguration_Backend_JaegerCollectorSpanExporter)(nil), // 11: buildbarn.configuration.global.TracingConfiguration.Backend.JaegerCollectorSpanExporter
+	(*TracingConfiguration_Backend_BatchSpanProcessor)(nil),          // 12: buildbarn.configuration.global.TracingConfiguration.Backend.BatchSpanProcessor
+	(*TracingConfiguration_ResourceAttributeValue_BoolArray)(nil),    // 13: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue.BoolArray
+	(*TracingConfiguration_ResourceAttributeValue_Int64Array)(nil),   // 14: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue.Int64Array
+	(*TracingConfiguration_ResourceAttributeValue_Float64Array)(nil), // 15: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue.Float64Array
+	(*TracingConfiguration_ResourceAttributeValue_StringArray)(nil),  // 16: buildbarn.configuration.global.TracingConfiguration.ResourceAttributeValue.StringArray
+	(*TracingConfiguration_Sampler_ParentBased)(nil),                 // 17: buildbarn.configuration.global.TracingConfiguration.Sampler.ParentBased
+	(*TracingConfiguration_Sampler_MaximumRate)(nil),                 // 18: buildbarn.configuration.global.TracingConfiguration.Sampler.MaximumRate
+	(*durationpb.Duration)(nil),                                      // 19: google.protobuf.Duration
+	(*grpc.ClientConfiguration)(nil),                                 // 20: buildbarn.configuration.grpc.ClientConfiguration
+	(*emptypb.Empty)(nil),                                            // 21: google.protobuf.Empty
+	(*tls.ClientConfiguration)(nil),                                  // 22: buildbarn.configuration.tls.ClientConfiguration
+}
 var file_pkg_proto_configuration_global_global_proto_depIdxs = []int32{
 	0,  // 0: buildbarn.configuration.global.PrometheusPushgatewayConfiguration.basic_authentication:type_name -> buildbarn.configuration.global.BasicAuthenticationConfiguration
 	6,  // 1: buildbarn.configuration.global.PrometheusPushgatewayConfiguration.grouping:type_name -> buildbarn.configuration.global.PrometheusPushgatewayConfiguration.GroupingEntry

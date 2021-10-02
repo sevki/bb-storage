@@ -444,8 +444,8 @@ def go_dependencies():
     go_repository(
         name = "com_github_pkg_sftp",
         importpath = "github.com/pkg/sftp",
-        sum = "h1:VasscCm72135zRysgrJDKsntdmPN+OuU3+nnHYA9wyc=",
-        version = "v1.10.1",
+        sum = "h1:4Zv0OGbpkg4yNuUtH0s8rvoYxRCNyT29NVUo6pgPmxI=",
+        version = "v1.11.0",
     )
     go_repository(
         name = "com_github_pmezard_go_difflib",

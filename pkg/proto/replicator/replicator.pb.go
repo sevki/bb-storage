@@ -8,9 +8,6 @@ package replicator
 
 import (
 	context "context"
-	reflect "reflect"
-	sync "sync"
-
 	v2 "github.com/bazelbuild/remote-apis/build/bazel/remote/execution/v2"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -18,6 +15,8 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -128,15 +127,12 @@ func file_pkg_proto_replicator_replicator_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_replicator_replicator_proto_rawDescData
 }
 
-var (
-	file_pkg_proto_replicator_replicator_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-	file_pkg_proto_replicator_replicator_proto_goTypes  = []interface{}{
-		(*ReplicateBlobsRequest)(nil), // 0: buildbarn.replicator.ReplicateBlobsRequest
-		(*v2.Digest)(nil),             // 1: build.bazel.remote.execution.v2.Digest
-		(*emptypb.Empty)(nil),         // 2: google.protobuf.Empty
-	}
-)
-
+var file_pkg_proto_replicator_replicator_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_pkg_proto_replicator_replicator_proto_goTypes = []interface{}{
+	(*ReplicateBlobsRequest)(nil), // 0: buildbarn.replicator.ReplicateBlobsRequest
+	(*v2.Digest)(nil),             // 1: build.bazel.remote.execution.v2.Digest
+	(*emptypb.Empty)(nil),         // 2: google.protobuf.Empty
+}
 var file_pkg_proto_replicator_replicator_proto_depIdxs = []int32{
 	1, // 0: buildbarn.replicator.ReplicateBlobsRequest.blob_digests:type_name -> build.bazel.remote.execution.v2.Digest
 	0, // 1: buildbarn.replicator.Replicator.ReplicateBlobs:input_type -> buildbarn.replicator.ReplicateBlobsRequest
@@ -188,10 +184,8 @@ func file_pkg_proto_replicator_replicator_proto_init() {
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
-var (
-	_ context.Context
-	_ grpc.ClientConnInterface
-)
+var _ context.Context
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
@@ -227,7 +221,8 @@ type ReplicatorServer interface {
 }
 
 // UnimplementedReplicatorServer can be embedded to have forward compatible implementations.
-type UnimplementedReplicatorServer struct{}
+type UnimplementedReplicatorServer struct {
+}
 
 func (*UnimplementedReplicatorServer) ReplicateBlobs(context.Context, *ReplicateBlobsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReplicateBlobs not implemented")
