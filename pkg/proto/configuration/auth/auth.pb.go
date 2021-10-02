@@ -7,12 +7,13 @@
 package auth
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	spiffe "github.com/buildbarn/bb-storage/pkg/proto/configuration/spiffe"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -298,15 +299,18 @@ func file_pkg_proto_configuration_auth_auth_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_configuration_auth_auth_proto_rawDescData
 }
 
-var file_pkg_proto_configuration_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_pkg_proto_configuration_auth_auth_proto_goTypes = []interface{}{
-	(*AuthorizerConfiguration)(nil), // 0: buildbarn.configuration.auth.AuthorizerConfiguration
-	(*InstanceNameAuthorizer)(nil),  // 1: buildbarn.configuration.auth.InstanceNameAuthorizer
-	(*SpiffeAuthorizer)(nil),        // 2: buildbarn.configuration.auth.SpiffeAuthorizer
-	nil,                             // 3: buildbarn.configuration.auth.SpiffeAuthorizer.InstanceNameSubjectMapEntry
-	(*emptypb.Empty)(nil),           // 4: google.protobuf.Empty
-	(*spiffe.SubjectMatcher)(nil),   // 5: buildbarn.configuration.spiffe.SubjectMatcher
-}
+var (
+	file_pkg_proto_configuration_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+	file_pkg_proto_configuration_auth_auth_proto_goTypes  = []interface{}{
+		(*AuthorizerConfiguration)(nil), // 0: buildbarn.configuration.auth.AuthorizerConfiguration
+		(*InstanceNameAuthorizer)(nil),  // 1: buildbarn.configuration.auth.InstanceNameAuthorizer
+		(*SpiffeAuthorizer)(nil),        // 2: buildbarn.configuration.auth.SpiffeAuthorizer
+		nil,                             // 3: buildbarn.configuration.auth.SpiffeAuthorizer.InstanceNameSubjectMapEntry
+		(*emptypb.Empty)(nil),           // 4: google.protobuf.Empty
+		(*spiffe.SubjectMatcher)(nil),   // 5: buildbarn.configuration.spiffe.SubjectMatcher
+	}
+)
+
 var file_pkg_proto_configuration_auth_auth_proto_depIdxs = []int32{
 	4, // 0: buildbarn.configuration.auth.AuthorizerConfiguration.allow:type_name -> google.protobuf.Empty
 	1, // 1: buildbarn.configuration.auth.AuthorizerConfiguration.instance_name_prefix:type_name -> buildbarn.configuration.auth.InstanceNameAuthorizer

@@ -20,7 +20,7 @@ type SpiffeAuthorizer struct {
 
 func NewSpiffeAuthorizer(config *pb.AuthorizerConfiguration) Authorizer {
 	spifAuth := config.GetSpiffe()
-	if spifAuth == nil {
+	if spifAuth != nil {
 		return &SpiffeAuthorizer{spifAuth}
 	}
 	return &SpiffeAuthorizer{}

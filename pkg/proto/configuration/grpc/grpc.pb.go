@@ -7,14 +7,15 @@
 package grpc
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	spiffe "github.com/buildbarn/bb-storage/pkg/proto/configuration/spiffe"
 	tls "github.com/buildbarn/bb-storage/pkg/proto/configuration/tls"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -907,23 +908,26 @@ func file_pkg_proto_configuration_grpc_grpc_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_configuration_grpc_grpc_proto_rawDescData
 }
 
-var file_pkg_proto_configuration_grpc_grpc_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
-var file_pkg_proto_configuration_grpc_grpc_proto_goTypes = []interface{}{
-	(*ClientConfiguration)(nil),                      // 0: buildbarn.configuration.grpc.ClientConfiguration
-	(*ClientKeepaliveConfiguration)(nil),             // 1: buildbarn.configuration.grpc.ClientKeepaliveConfiguration
-	(*ClientOAuthConfiguration)(nil),                 // 2: buildbarn.configuration.grpc.ClientOAuthConfiguration
-	(*ServerConfiguration)(nil),                      // 3: buildbarn.configuration.grpc.ServerConfiguration
-	(*ServerKeepaliveEnforcementPolicy)(nil),         // 4: buildbarn.configuration.grpc.ServerKeepaliveEnforcementPolicy
-	(*AuthenticationPolicy)(nil),                     // 5: buildbarn.configuration.grpc.AuthenticationPolicy
-	(*AnyAuthenticationPolicy)(nil),                  // 6: buildbarn.configuration.grpc.AnyAuthenticationPolicy
-	(*TLSClientCertificateAuthenticationPolicy)(nil), // 7: buildbarn.configuration.grpc.TLSClientCertificateAuthenticationPolicy
-	(*ClientConfiguration_HeaderValues)(nil),         // 8: buildbarn.configuration.grpc.ClientConfiguration.HeaderValues
-	(*tls.ClientConfiguration)(nil),                  // 9: buildbarn.configuration.tls.ClientConfiguration
-	(*durationpb.Duration)(nil),                      // 10: google.protobuf.Duration
-	(*emptypb.Empty)(nil),                            // 11: google.protobuf.Empty
-	(*tls.ServerConfiguration)(nil),                  // 12: buildbarn.configuration.tls.ServerConfiguration
-	(*spiffe.SubjectMatcher)(nil),                    // 13: buildbarn.configuration.spiffe.SubjectMatcher
-}
+var (
+	file_pkg_proto_configuration_grpc_grpc_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+	file_pkg_proto_configuration_grpc_grpc_proto_goTypes  = []interface{}{
+		(*ClientConfiguration)(nil),                      // 0: buildbarn.configuration.grpc.ClientConfiguration
+		(*ClientKeepaliveConfiguration)(nil),             // 1: buildbarn.configuration.grpc.ClientKeepaliveConfiguration
+		(*ClientOAuthConfiguration)(nil),                 // 2: buildbarn.configuration.grpc.ClientOAuthConfiguration
+		(*ServerConfiguration)(nil),                      // 3: buildbarn.configuration.grpc.ServerConfiguration
+		(*ServerKeepaliveEnforcementPolicy)(nil),         // 4: buildbarn.configuration.grpc.ServerKeepaliveEnforcementPolicy
+		(*AuthenticationPolicy)(nil),                     // 5: buildbarn.configuration.grpc.AuthenticationPolicy
+		(*AnyAuthenticationPolicy)(nil),                  // 6: buildbarn.configuration.grpc.AnyAuthenticationPolicy
+		(*TLSClientCertificateAuthenticationPolicy)(nil), // 7: buildbarn.configuration.grpc.TLSClientCertificateAuthenticationPolicy
+		(*ClientConfiguration_HeaderValues)(nil),         // 8: buildbarn.configuration.grpc.ClientConfiguration.HeaderValues
+		(*tls.ClientConfiguration)(nil),                  // 9: buildbarn.configuration.tls.ClientConfiguration
+		(*durationpb.Duration)(nil),                      // 10: google.protobuf.Duration
+		(*emptypb.Empty)(nil),                            // 11: google.protobuf.Empty
+		(*tls.ServerConfiguration)(nil),                  // 12: buildbarn.configuration.tls.ServerConfiguration
+		(*spiffe.SubjectMatcher)(nil),                    // 13: buildbarn.configuration.spiffe.SubjectMatcher
+	}
+)
+
 var file_pkg_proto_configuration_grpc_grpc_proto_depIdxs = []int32{
 	9,  // 0: buildbarn.configuration.grpc.ClientConfiguration.tls:type_name -> buildbarn.configuration.tls.ClientConfiguration
 	1,  // 1: buildbarn.configuration.grpc.ClientConfiguration.keepalive:type_name -> buildbarn.configuration.grpc.ClientKeepaliveConfiguration
