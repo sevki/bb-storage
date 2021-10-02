@@ -301,7 +301,7 @@
    "on": {
       "push": {
          "branches": [
-            "master"
+            "main"
          ]
       }
    }
