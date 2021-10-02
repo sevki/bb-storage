@@ -21,6 +21,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/klauspost/compress v1.13.3
 	github.com/lazybeaver/xorshift v0.0.0-20170702203709-ce511d4823dd
+	github.com/pkg/sftp v1.11.0 // indirect
 	github.com/prometheus/client_golang v1.11.0
 	github.com/spiffe/go-spiffe/v2 v2.0.0-beta.8 // indirect
 	github.com/stretchr/testify v1.7.0
