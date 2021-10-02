@@ -17,7 +17,6 @@ import (
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds"
-	_ "google.golang.org/grpc/xds/googledirectpath"
 )
 
 func init() {

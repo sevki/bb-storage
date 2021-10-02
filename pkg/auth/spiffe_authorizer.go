@@ -14,10 +14,12 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// SpiffeAuthorizer authorizes based on spiffeid
 type SpiffeAuthorizer struct {
 	*pb.SpiffeAuthorizer
 }
 
+// NewSpiffeAuthorizer takes allowed subjects confi and returns a new uathorizes
 func NewSpiffeAuthorizer(config *pb.AuthorizerConfiguration) Authorizer {
 	spifAuth := config.GetSpiffe()
 	if spifAuth != nil {
@@ -26,36 +28,39 @@ func NewSpiffeAuthorizer(config *pb.AuthorizerConfiguration) Authorizer {
 	return &SpiffeAuthorizer{}
 }
 
+// Authorize implements the authorizer interface
 func (s *SpiffeAuthorizer) Authorize(ctx context.Context, instanceNames []digest.InstanceName) []error {
 	errs := make([]error, len(instanceNames))
 	var err error
-FILLERRORS:
-	if err != nil {
+	fillerrors := func(err error) {
 		for i := range errs {
 			errs[i] = err
 		}
-		return errs
 	}
 	// Extract client certificate chain from the connection.
 	p, ok := peer.FromContext(ctx)
 	if !ok {
 		err = status.Error(codes.Unauthenticated, "Connection was not established using gRPC")
-		goto FILLERRORS
+		fillerrors(err)
+		return
 	}
 	tlsInfo, ok := p.AuthInfo.(credentials.TLSInfo)
 	if !ok {
 		err = status.Error(codes.Unauthenticated, "Connection was not established using TLS")
-		goto FILLERRORS
+		fillerrors(err)
+		return
 	}
 	certs := tlsInfo.State.PeerCertificates
 	if len(certs) == 0 {
 		err = status.Error(codes.Unauthenticated, "Client provided no TLS client certificate")
-		goto FILLERRORS
+		fillerrors(err)
+		return
 	}
 	var id spiffeid.ID
 	id, err = x509svid.IDFromCert(certs[len(certs)-1])
 	if err != nil {
-		goto FILLERRORS
+		fillerrors(err)
+		return
 	}
 	for i, instanceName := range instanceNames {
 		instanceMatcher, ok := s.InstanceNameSubjectMap[instanceName.String()]
