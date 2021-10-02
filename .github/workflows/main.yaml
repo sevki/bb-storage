@@ -297,7 +297,7 @@
          ]
       }
    },
-   "name": "master",
+   "name": "main",
    "on": {
       "push": {
          "branches": [
