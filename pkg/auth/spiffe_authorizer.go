@@ -42,25 +42,25 @@ func (s *SpiffeAuthorizer) Authorize(ctx context.Context, instanceNames []digest
 	if !ok {
 		err = status.Error(codes.Unauthenticated, "Connection was not established using gRPC")
 		fillerrors(err)
-		return
+		return errs
 	}
 	tlsInfo, ok := p.AuthInfo.(credentials.TLSInfo)
 	if !ok {
 		err = status.Error(codes.Unauthenticated, "Connection was not established using TLS")
 		fillerrors(err)
-		return
+		return errs
 	}
 	certs := tlsInfo.State.PeerCertificates
 	if len(certs) == 0 {
 		err = status.Error(codes.Unauthenticated, "Client provided no TLS client certificate")
 		fillerrors(err)
-		return
+		return errs
 	}
 	var id spiffeid.ID
 	id, err = x509svid.IDFromCert(certs[len(certs)-1])
 	if err != nil {
 		fillerrors(err)
-		return
+		return errs
 	}
 	for i, instanceName := range instanceNames {
 		instanceMatcher, ok := s.InstanceNameSubjectMap[instanceName.String()]
