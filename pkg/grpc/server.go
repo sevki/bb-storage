@@ -16,7 +16,6 @@ import (
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds"
 )
 
 func init() {
@@ -90,20 +89,12 @@ func NewServersFromConfigurationAndServe(configurations []*configuration.ServerC
 			}))
 		}
 
-		// Create server.
-		// https://pkg.go.dev/google.golang.org/grpc/internal/xds/env
-		var s server
-		if os.Getenv("GRPC_XDS_BOOTSTRAP") != "" || os.Getenv("GRPC_XDS_BOOSTRAP_CONFIG") != "" || os.Getenv("GRPC_EXPERIMENTAL_GOOGLE_C2P_RESOLVER") == "true" {
-			s = xds.NewGRPCServer(serverOptions...)
-		} else {
-			s = grpc.NewServer(serverOptions...)
-		}
+		s := grpc.NewServer(serverOptions...)
+
 		registrationFunc(s)
 
 		// Enable default services.
-		if grpcServer, ok := s.(*grpc.Server); ok {
-			grpc_prometheus.Register(grpcServer)
-		}
+		grpc_prometheus.Register(s)
 		reflection.Register(s)
 		h := health.NewServer()
 		grpc_health_v1.RegisterHealthServer(s, h)

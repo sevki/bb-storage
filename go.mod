@@ -3,6 +3,7 @@ module github.com/buildbarn/bb-storage
 go 1.16
 
 replace github.com/gordonklaus/ineffassign => github.com/gordonklaus/ineffassign v0.0.0-20201223204552-cba2d2a1d5d9
+replace	github.com/pkg/sftp v1.10.1  => github.com/pkg/sftp v1.11.0
 
 require (
 	dmitri.shuralyov.com/go/generated v0.0.0-20170818220700-b1254a446363 // indirect
