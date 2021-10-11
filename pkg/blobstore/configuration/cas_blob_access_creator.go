@@ -1,16 +1,17 @@
 package configuration
 
 import (
+	"net/http"
 	"sync"
 
-	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/buildbarn/bb-storage/pkg/blobstore"
 	"github.com/buildbarn/bb-storage/pkg/blobstore/grpcclients"
 	"github.com/buildbarn/bb-storage/pkg/blobstore/local"
 	"github.com/buildbarn/bb-storage/pkg/cloud/aws"
 	"github.com/buildbarn/bb-storage/pkg/digest"
 	"github.com/buildbarn/bb-storage/pkg/grpc"
-	"github.com/buildbarn/bb-storage/pkg/http"
+	bb_http "github.com/buildbarn/bb-storage/pkg/http"
 	pb "github.com/buildbarn/bb-storage/pkg/proto/configuration/blobstore"
 	"github.com/buildbarn/bb-storage/pkg/util"
 	"github.com/google/uuid"
@@ -99,20 +100,19 @@ func (bac *casBlobAccessCreator) NewCustomBlobAccess(configuration *pb.BlobAcces
 		if err != nil {
 			return BlobAccessInfo{}, "", err
 		}
-		sess, err := aws.NewSessionFromConfiguration(backend.ReferenceExpanding.AwsSession)
+		cfg, err := aws.NewConfigFromConfiguration(backend.ReferenceExpanding.AwsSession)
 		if err != nil {
-			return BlobAccessInfo{}, "", util.StatusWrap(err, "Failed to create AWS session")
+			return BlobAccessInfo{}, "", util.StatusWrap(err, "Failed to create AWS config")
 		}
-		// TODO: Add TLS client options to configuration schema.
-		httpClient, err := http.NewClient(nil)
+		roundTripper, err := bb_http.NewRoundTripperFromConfiguration(backend.ReferenceExpanding.HttpClient)
 		if err != nil {
 			return BlobAccessInfo{}, "", util.StatusWrap(err, "Failed to create HTTP client")
 		}
 		return BlobAccessInfo{
 			BlobAccess: blobstore.NewReferenceExpandingBlobAccess(
 				base.BlobAccess,
-				httpClient,
-				s3.New(sess),
+				&http.Client{Transport: roundTripper},
+				s3.NewFromConfig(cfg),
 				bac.maximumMessageSizeBytes),
 			DigestKeyFormat: base.DigestKeyFormat,
 		}, "reference_expanding", nil
