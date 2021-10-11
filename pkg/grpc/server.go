@@ -25,11 +25,6 @@ func init() {
 			util.DecimalExponentialBuckets(-3, 6, 2)))
 }
 
-type server interface {
-	grpc.ServiceRegistrar
-	GetServiceInfo() map[string]grpc.ServiceInfo
-	Serve(net.Listener) error
-}
 
 // NewServersFromConfigurationAndServe creates a series of gRPC servers
 // based on a configuration stored in a list of Protobuf messages. It
