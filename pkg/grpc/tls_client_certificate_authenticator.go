@@ -4,7 +4,11 @@ import (
 	"context"
 	"crypto/x509"
 	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
 	"path"
+	"time"
 
 	"github.com/buildbarn/bb-storage/pkg/clock"
 	"github.com/buildbarn/bb-storage/pkg/proto/configuration/spiffe"
@@ -21,21 +25,58 @@ type tlsClientCertificateAuthenticator struct {
 	clientCAs       *x509.CertPool
 	clock           clock.Clock
 	allowedSubjects *spiffe.SubjectMatcher
+	caPathName      string
+	caMtime         time.Time
 }
 
 // NewTLSClientCertificateAuthenticator creates an Authenticator that
 // only grants access in case the client connected to the gRPC server
 // using a TLS client certificate that can be validated against the
 // chain of CAs used by the server.
-func NewTLSClientCertificateAuthenticator(clientCAs *x509.CertPool, clock clock.Clock, allowedSubjects *spiffe.SubjectMatcher) Authenticator {
+func NewTLSClientCertificateAuthenticator(clientCAs *x509.CertPool, clock clock.Clock, allowedSubjects *spiffe.SubjectMatcher,
+	caPathName string) Authenticator {
+	var mtime time.Time
+	if caPathName != "" {
+		fi, err := os.Stat(caPathName)
+		if err == nil {
+			mtime = fi.ModTime()
+		} else {
+			log.Printf("NewTLSClientCertificateAuthenticator: can't stat %s: %v\n", caPathName, err)
+		}
+	}
 	return &tlsClientCertificateAuthenticator{
 		allowedSubjects: allowedSubjects,
 		clientCAs:       clientCAs,
 		clock:           clock,
+		caPathName:      caPathName,
+		caMtime:         mtime,
 	}
 }
 
 func (a *tlsClientCertificateAuthenticator) Authenticate(ctx context.Context) (context.Context, error) {
+	// Check if we need to reload CA certs.
+	if a.caPathName != "" {
+		fi, err := os.Stat(a.caPathName)
+		if err == nil {
+			mtime := fi.ModTime()
+			if  mtime != a.caMtime {
+				// CA certs file has changed, so reload it.
+				b, err := ioutil.ReadFile(a.caPathName)
+				if err != nil {
+					log.Printf("Authenticate: can't read caCerts: %v\n", err)
+				} else {
+					caCerts := x509.NewCertPool()
+					if !caCerts.AppendCertsFromPEM(b) {
+						log.Println("Authenticate: invalid server certificate authorities")
+					} else {
+						a.clientCAs = caCerts
+						a.caMtime = mtime
+					}
+				}
+			}
+		}
+	}
+
 	// Extract client certificate chain from the connection.
 	p, ok := peer.FromContext(ctx)
 	if !ok {
