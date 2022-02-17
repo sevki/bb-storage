@@ -5,20 +5,17 @@ go 1.16
 replace github.com/gordonklaus/ineffassign => github.com/gordonklaus/ineffassign v0.0.0-20201223204552-cba2d2a1d5d9
 
 require (
-	dmitri.shuralyov.com/go/generated v0.0.0-20170818220700-b1254a446363 // indirect
 	github.com/aws/aws-sdk-go v1.40.14
 	github.com/bazelbuild/remote-apis v0.0.0-20210718193713-0ecef08215cf
 	github.com/go-redis/redis/extra/redisotel v0.3.0
 	github.com/go-redis/redis/v8 v8.11.1
 	github.com/golang/mock v1.6.0
-	github.com/golang/protobuf v1.5.2
 	github.com/google/go-jsonnet v0.17.0
 	github.com/google/uuid v1.3.0
-	github.com/gordonklaus/ineffassign v0.0.0-20210729092907-69aca2aeecd0
 	github.com/gorilla/mux v1.8.0
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
-	github.com/klauspost/compress v1.13.3
+	github.com/klauspost/compress v1.14.3
 	github.com/lazybeaver/xorshift v0.0.0-20170702203709-ce511d4823dd
 	github.com/prometheus/client_golang v1.11.0
 	github.com/stretchr/testify v1.7.0
@@ -34,5 +31,4 @@ require (
 	google.golang.org/genproto v0.0.0-20210803142424-70bd63adacf2
 	google.golang.org/grpc v1.39.0
 	google.golang.org/protobuf v1.27.1
-	mvdan.cc/gofumpt v0.1.1
 )
