@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "purgecss": "^4.0.3"
+    "purgecss": "^7.0.2"
   }
 }
