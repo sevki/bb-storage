@@ -7,6 +7,9 @@
 package blobstore
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	blockdevice "github.com/buildbarn/bb-storage/pkg/proto/configuration/blockdevice"
 	aws "github.com/buildbarn/bb-storage/pkg/proto/configuration/cloud/aws"
 	digest "github.com/buildbarn/bb-storage/pkg/proto/configuration/digest"
@@ -17,8 +20,6 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -2349,41 +2350,44 @@ func file_pkg_proto_configuration_blobstore_blobstore_proto_rawDescGZIP() []byte
 	return file_pkg_proto_configuration_blobstore_blobstore_proto_rawDescData
 }
 
-var file_pkg_proto_configuration_blobstore_blobstore_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
-var file_pkg_proto_configuration_blobstore_blobstore_proto_goTypes = []interface{}{
-	(*BlobstoreConfiguration)(nil),                              // 0: buildbarn.configuration.blobstore.BlobstoreConfiguration
-	(*BlobAccessConfiguration)(nil),                             // 1: buildbarn.configuration.blobstore.BlobAccessConfiguration
-	(*ReadCachingBlobAccessConfiguration)(nil),                  // 2: buildbarn.configuration.blobstore.ReadCachingBlobAccessConfiguration
-	(*ClusteredRedisBlobAccessConfiguration)(nil),               // 3: buildbarn.configuration.blobstore.ClusteredRedisBlobAccessConfiguration
-	(*SingleRedisBlobAccessConfiguration)(nil),                  // 4: buildbarn.configuration.blobstore.SingleRedisBlobAccessConfiguration
-	(*RedisBlobAccessConfiguration)(nil),                        // 5: buildbarn.configuration.blobstore.RedisBlobAccessConfiguration
-	(*HTTPBlobAccessConfiguration)(nil),                         // 6: buildbarn.configuration.blobstore.HTTPBlobAccessConfiguration
-	(*ShardingBlobAccessConfiguration)(nil),                     // 7: buildbarn.configuration.blobstore.ShardingBlobAccessConfiguration
-	(*SizeDistinguishingBlobAccessConfiguration)(nil),           // 8: buildbarn.configuration.blobstore.SizeDistinguishingBlobAccessConfiguration
-	(*MirroredBlobAccessConfiguration)(nil),                     // 9: buildbarn.configuration.blobstore.MirroredBlobAccessConfiguration
-	(*LocalBlobAccessConfiguration)(nil),                        // 10: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration
-	(*ExistenceCachingBlobAccessConfiguration)(nil),             // 11: buildbarn.configuration.blobstore.ExistenceCachingBlobAccessConfiguration
-	(*ReadFallbackBlobAccessConfiguration)(nil),                 // 12: buildbarn.configuration.blobstore.ReadFallbackBlobAccessConfiguration
-	(*ReferenceExpandingBlobAccessConfiguration)(nil),           // 13: buildbarn.configuration.blobstore.ReferenceExpandingBlobAccessConfiguration
-	(*BlobReplicatorConfiguration)(nil),                         // 14: buildbarn.configuration.blobstore.BlobReplicatorConfiguration
-	(*QueuedBlobReplicatorConfiguration)(nil),                   // 15: buildbarn.configuration.blobstore.QueuedBlobReplicatorConfiguration
-	(*DemultiplexingBlobAccessConfiguration)(nil),               // 16: buildbarn.configuration.blobstore.DemultiplexingBlobAccessConfiguration
-	(*DemultiplexedBlobAccessConfiguration)(nil),                // 17: buildbarn.configuration.blobstore.DemultiplexedBlobAccessConfiguration
-	(*ShardingBlobAccessConfiguration_Shard)(nil),               // 18: buildbarn.configuration.blobstore.ShardingBlobAccessConfiguration.Shard
-	(*LocalBlobAccessConfiguration_KeyLocationMapInMemory)(nil), // 19: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration.KeyLocationMapInMemory
-	(*LocalBlobAccessConfiguration_BlocksInMemory)(nil),         // 20: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration.BlocksInMemory
-	(*LocalBlobAccessConfiguration_BlocksOnBlockDevice)(nil),    // 21: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration.BlocksOnBlockDevice
-	(*LocalBlobAccessConfiguration_Persistent)(nil),             // 22: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration.Persistent
-	nil,                                        // 23: buildbarn.configuration.blobstore.DemultiplexingBlobAccessConfiguration.InstanceNamePrefixesEntry
-	(*grpc.ClientConfiguration)(nil),           // 24: buildbarn.configuration.grpc.ClientConfiguration
-	(*status.Status)(nil),                      // 25: google.rpc.Status
-	(*durationpb.Duration)(nil),                // 26: google.protobuf.Duration
-	(*tls.ClientConfiguration)(nil),            // 27: buildbarn.configuration.tls.ClientConfiguration
-	(*blockdevice.Configuration)(nil),          // 28: buildbarn.configuration.blockdevice.Configuration
-	(*digest.ExistenceCacheConfiguration)(nil), // 29: buildbarn.configuration.digest.ExistenceCacheConfiguration
-	(*aws.SessionConfiguration)(nil),           // 30: buildbarn.configuration.cloud.aws.SessionConfiguration
-	(*emptypb.Empty)(nil),                      // 31: google.protobuf.Empty
-}
+var (
+	file_pkg_proto_configuration_blobstore_blobstore_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+	file_pkg_proto_configuration_blobstore_blobstore_proto_goTypes  = []interface{}{
+		(*BlobstoreConfiguration)(nil),                              // 0: buildbarn.configuration.blobstore.BlobstoreConfiguration
+		(*BlobAccessConfiguration)(nil),                             // 1: buildbarn.configuration.blobstore.BlobAccessConfiguration
+		(*ReadCachingBlobAccessConfiguration)(nil),                  // 2: buildbarn.configuration.blobstore.ReadCachingBlobAccessConfiguration
+		(*ClusteredRedisBlobAccessConfiguration)(nil),               // 3: buildbarn.configuration.blobstore.ClusteredRedisBlobAccessConfiguration
+		(*SingleRedisBlobAccessConfiguration)(nil),                  // 4: buildbarn.configuration.blobstore.SingleRedisBlobAccessConfiguration
+		(*RedisBlobAccessConfiguration)(nil),                        // 5: buildbarn.configuration.blobstore.RedisBlobAccessConfiguration
+		(*HTTPBlobAccessConfiguration)(nil),                         // 6: buildbarn.configuration.blobstore.HTTPBlobAccessConfiguration
+		(*ShardingBlobAccessConfiguration)(nil),                     // 7: buildbarn.configuration.blobstore.ShardingBlobAccessConfiguration
+		(*SizeDistinguishingBlobAccessConfiguration)(nil),           // 8: buildbarn.configuration.blobstore.SizeDistinguishingBlobAccessConfiguration
+		(*MirroredBlobAccessConfiguration)(nil),                     // 9: buildbarn.configuration.blobstore.MirroredBlobAccessConfiguration
+		(*LocalBlobAccessConfiguration)(nil),                        // 10: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration
+		(*ExistenceCachingBlobAccessConfiguration)(nil),             // 11: buildbarn.configuration.blobstore.ExistenceCachingBlobAccessConfiguration
+		(*ReadFallbackBlobAccessConfiguration)(nil),                 // 12: buildbarn.configuration.blobstore.ReadFallbackBlobAccessConfiguration
+		(*ReferenceExpandingBlobAccessConfiguration)(nil),           // 13: buildbarn.configuration.blobstore.ReferenceExpandingBlobAccessConfiguration
+		(*BlobReplicatorConfiguration)(nil),                         // 14: buildbarn.configuration.blobstore.BlobReplicatorConfiguration
+		(*QueuedBlobReplicatorConfiguration)(nil),                   // 15: buildbarn.configuration.blobstore.QueuedBlobReplicatorConfiguration
+		(*DemultiplexingBlobAccessConfiguration)(nil),               // 16: buildbarn.configuration.blobstore.DemultiplexingBlobAccessConfiguration
+		(*DemultiplexedBlobAccessConfiguration)(nil),                // 17: buildbarn.configuration.blobstore.DemultiplexedBlobAccessConfiguration
+		(*ShardingBlobAccessConfiguration_Shard)(nil),               // 18: buildbarn.configuration.blobstore.ShardingBlobAccessConfiguration.Shard
+		(*LocalBlobAccessConfiguration_KeyLocationMapInMemory)(nil), // 19: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration.KeyLocationMapInMemory
+		(*LocalBlobAccessConfiguration_BlocksInMemory)(nil),         // 20: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration.BlocksInMemory
+		(*LocalBlobAccessConfiguration_BlocksOnBlockDevice)(nil),    // 21: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration.BlocksOnBlockDevice
+		(*LocalBlobAccessConfiguration_Persistent)(nil),             // 22: buildbarn.configuration.blobstore.LocalBlobAccessConfiguration.Persistent
+		nil,                                        // 23: buildbarn.configuration.blobstore.DemultiplexingBlobAccessConfiguration.InstanceNamePrefixesEntry
+		(*grpc.ClientConfiguration)(nil),           // 24: buildbarn.configuration.grpc.ClientConfiguration
+		(*status.Status)(nil),                      // 25: google.rpc.Status
+		(*durationpb.Duration)(nil),                // 26: google.protobuf.Duration
+		(*tls.ClientConfiguration)(nil),            // 27: buildbarn.configuration.tls.ClientConfiguration
+		(*blockdevice.Configuration)(nil),          // 28: buildbarn.configuration.blockdevice.Configuration
+		(*digest.ExistenceCacheConfiguration)(nil), // 29: buildbarn.configuration.digest.ExistenceCacheConfiguration
+		(*aws.SessionConfiguration)(nil),           // 30: buildbarn.configuration.cloud.aws.SessionConfiguration
+		(*emptypb.Empty)(nil),                      // 31: google.protobuf.Empty
+	}
+)
+
 var file_pkg_proto_configuration_blobstore_blobstore_proto_depIdxs = []int32{
 	1,  // 0: buildbarn.configuration.blobstore.BlobstoreConfiguration.content_addressable_storage:type_name -> buildbarn.configuration.blobstore.BlobAccessConfiguration
 	1,  // 1: buildbarn.configuration.blobstore.BlobstoreConfiguration.action_cache:type_name -> buildbarn.configuration.blobstore.BlobAccessConfiguration

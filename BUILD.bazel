@@ -4,6 +4,8 @@ load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 # gazelle:prefix github.com/buildbarn/bb-storage
 # gazelle:resolve proto build/bazel/remote/execution/v2/remote_execution.proto @com_github_bazelbuild_remote_apis//build/bazel/remote/execution/v2:remote_execution_proto
 # gazelle:resolve proto go build/bazel/remote/execution/v2/remote_execution.proto @com_github_bazelbuild_remote_apis//build/bazel/remote/execution/v2:execution
+# gazelle:resolve proto go go.starlark.net/starlark @net_starlark_go//starlark
+# gazelle:go_proto_compilers @io_bazel_rules_go//proto:go_proto,//tools:starlark_go
 gazelle(
     name = "gazelle",
 )

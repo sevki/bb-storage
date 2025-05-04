@@ -7,12 +7,13 @@
 package digest
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	eviction "github.com/buildbarn/bb-storage/pkg/proto/configuration/eviction"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -132,12 +133,15 @@ func file_pkg_proto_configuration_digest_digest_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_configuration_digest_digest_proto_rawDescData
 }
 
-var file_pkg_proto_configuration_digest_digest_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_pkg_proto_configuration_digest_digest_proto_goTypes = []interface{}{
-	(*ExistenceCacheConfiguration)(nil),  // 0: buildbarn.configuration.digest.ExistenceCacheConfiguration
-	(*durationpb.Duration)(nil),          // 1: google.protobuf.Duration
-	(eviction.CacheReplacementPolicy)(0), // 2: buildbarn.configuration.eviction.CacheReplacementPolicy
-}
+var (
+	file_pkg_proto_configuration_digest_digest_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_pkg_proto_configuration_digest_digest_proto_goTypes  = []interface{}{
+		(*ExistenceCacheConfiguration)(nil),  // 0: buildbarn.configuration.digest.ExistenceCacheConfiguration
+		(*durationpb.Duration)(nil),          // 1: google.protobuf.Duration
+		(eviction.CacheReplacementPolicy)(0), // 2: buildbarn.configuration.eviction.CacheReplacementPolicy
+	}
+)
+
 var file_pkg_proto_configuration_digest_digest_proto_depIdxs = []int32{
 	1, // 0: buildbarn.configuration.digest.ExistenceCacheConfiguration.cache_duration:type_name -> google.protobuf.Duration
 	2, // 1: buildbarn.configuration.digest.ExistenceCacheConfiguration.cache_replacement_policy:type_name -> buildbarn.configuration.eviction.CacheReplacementPolicy

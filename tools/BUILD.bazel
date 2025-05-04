@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//proto:compiler.bzl", "go_proto_compiler")
+
+go_proto_compiler(
+    name = "starlark_go",
+    #plugin = "@com_github_imsingee_protoc_gen_starlark_go//:protoc-gen-starlark-go",
+    plugin = "//protoc-gen-starlark-go:protoc-gen-starlark-go",
+    suffix = "_starlark.pb.go",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/proto/configuration",
+        "//pkg/starlarkutil",
+        "@net_starlark_go//lib/time",
+        "@net_starlark_go//starlark",
+        "@net_starlark_go//starlarkstruct",
+    ],
+)

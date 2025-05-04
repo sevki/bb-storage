@@ -7,11 +7,12 @@
 package auth
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -211,12 +212,15 @@ func file_pkg_proto_configuration_auth_auth_proto_rawDescGZIP() []byte {
 	return file_pkg_proto_configuration_auth_auth_proto_rawDescData
 }
 
-var file_pkg_proto_configuration_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_pkg_proto_configuration_auth_auth_proto_goTypes = []interface{}{
-	(*AuthorizerConfiguration)(nil), // 0: buildbarn.configuration.auth.AuthorizerConfiguration
-	(*InstanceNameAuthorizer)(nil),  // 1: buildbarn.configuration.auth.InstanceNameAuthorizer
-	(*emptypb.Empty)(nil),           // 2: google.protobuf.Empty
-}
+var (
+	file_pkg_proto_configuration_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_pkg_proto_configuration_auth_auth_proto_goTypes  = []interface{}{
+		(*AuthorizerConfiguration)(nil), // 0: buildbarn.configuration.auth.AuthorizerConfiguration
+		(*InstanceNameAuthorizer)(nil),  // 1: buildbarn.configuration.auth.InstanceNameAuthorizer
+		(*emptypb.Empty)(nil),           // 2: google.protobuf.Empty
+	}
+)
+
 var file_pkg_proto_configuration_auth_auth_proto_depIdxs = []int32{
 	2, // 0: buildbarn.configuration.auth.AuthorizerConfiguration.allow:type_name -> google.protobuf.Empty
 	1, // 1: buildbarn.configuration.auth.AuthorizerConfiguration.instance_name_prefix:type_name -> buildbarn.configuration.auth.InstanceNameAuthorizer
